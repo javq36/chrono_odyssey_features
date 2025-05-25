@@ -1,7 +1,5 @@
 # chrono_odyssey_features
 
-# chrono_odyssey_features
-
 Features developed with AI.
 
 ## Table of Contents

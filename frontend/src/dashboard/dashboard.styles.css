@@ -1,0 +1,112 @@
+body,
+html,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  background-color: #f7fafc; /* New main page background (very light grey) */
+  color: #2d3748; /* New default text color (dark grey) */
+  font-family: "Inter", sans-serif; /* Example: A clean sans-serif font, ensure you import it or use a system font */
+}
+
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* New Sidebar Styles */
+.new-theme-sidebar .p-sidebar-content {
+  padding: 0.5rem 0; /* Add some vertical padding to the sidebar content area */
+  display: flex;
+  flex-direction: column;
+}
+
+.new-theme-sidebar .sidebar-app-header {
+  /* Styles are mostly inline for now, can be moved here */
+  padding: 0.5rem 1.25rem 1rem 1.25rem; /* Match link horizontal padding */
+}
+
+/* PanelMenu general structure */
+.new-theme-panelmenu.p-panelmenu {
+  background: transparent !important; /* Ensure PanelMenu itself is transparent */
+}
+
+.new-theme-panelmenu .p-panelmenu-header,
+.new-theme-panelmenu .p-panelmenu-content,
+.new-theme-panelmenu .p-menuitem {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important; /* Ensure these containers are transparent */
+}
+
+/* Styling for the <a> tags is now primarily handled by inline styles (templateLinkStyle) */
+/* This CSS block can be simplified or removed if all aspects are in templateLinkStyle */
+.new-theme-panelmenu .p-panelmenu-header > a.menu-item-link, /* Target the added class */
+.new-theme-panelmenu .p-menuitem-link.menu-item-link {
+  /* Target the added class */
+  /* border-radius: 6px; /* This is now in templateLinkStyle */
+  /* margin: 0.25rem 0.75rem; /* This is now in templateLinkStyle or removed for tighter fit */
+  /* Most visual styles (padding, color, background, border-left) are in templateLinkStyle */
+}
+
+.new-theme-panelmenu .p-panelmenu-header > a:focus,
+.new-theme-panelmenu .p-menuitem-link:focus {
+  box-shadow: none !important; /* Consistent focus style removal */
+}
+
+/* Hover styles for non-active items (adapting to new colors) */
+/* These will apply on top of the inactive state from templateLinkStyle */
+.new-theme-panelmenu
+  li.p-menuitem:not(.p-menuitem-active-inline)
+  > .p-menuitem-content
+  > a.menu-item-link:hover,
+.new-theme-panelmenu
+  li.p-menuitem:not(.p-menuitem-active-inline)
+  > .p-panelmenu-header
+  > a.menu-item-link:hover {
+  background: rgba(
+    255,
+    255,
+    255,
+    0.08
+  ) !important; /* Even more subtle light hover */
+  /* color: #FFFFFF !important; // Text color on hover can be inherited or set if different */
+}
+/* Icon color on hover can be handled by the general link hover if icons inherit color, or styled separately */
+
+/* Main content area - ENSURE THIS IS APPLIED */
+.dashboard-main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #f7fafc !important; /* Light background for main content */
+}
+
+/* Toolbar Styles - ENSURE THIS IS APPLIED */
+.new-theme-toolbar.app-header {
+  background: #ffffff !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  color: #2d3748 !important;
+}
+
+.new-theme-toolbar .p-button-text {
+  color: #4a55a2 !important;
+}
+.new-theme-toolbar .p-button-text:hover {
+  background-color: rgba(74, 85, 162, 0.1) !important;
+}
+
+.dashboard-content-area {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+/* Remove old general PanelMenu item styling if it conflicts */
+/*
+.dashboard-primereact-sidebar .p-panelmenu .p-menuitem > .p-menuitem-content > .p-menuitem-link,
+.dashboard-primereact-sidebar .p-panelmenu .p-panelmenu-header > a {
+  width: 100%;
+  justify-content: flex-start;
+}
+*/

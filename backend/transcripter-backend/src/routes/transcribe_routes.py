@@ -16,7 +16,9 @@ def download_youtube_video(url, output_path):
         'quiet': True,
     }
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        ydl.download([url])
+        info = ydl.extract_info(url, download=True)
+        video_title = info.get("title")
+        channel_name = info.get("uploader")
 
 def split_audio_to_chunks(audio_path, max_bytes=24*1024*1024):
     audio = AudioSegment.from_wav(audio_path)

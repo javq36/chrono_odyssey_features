@@ -1,16 +1,33 @@
 def create_reddit_posts_table(cursor):
-    cursor.execute('''
+    """Creates the reddit_posts table if it doesn't exist."""
+    cursor.execute("""
         CREATE TABLE IF NOT EXISTS reddit_posts (
             id TEXT PRIMARY KEY,
-            title TEXT NOT NULL,
+            title TEXT,
             selftext TEXT,
-            url TEXT UNIQUE,
-            scraped_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            processed_at TIMESTAMP,
-            key_points TEXT 
-        )
-    ''')
-    print("Ensured reddit_posts table exists.")
+            url TEXT,
+            created_utc REAL, 
+            scraped_at TEXT,
+            processed INTEGER DEFAULT 0,
+            key_points TEXT
+        );
+    """)
+    print("Schema: reddit_posts table ensured.")
+
+def create_reddit_comments_table(cursor): # Asegúrate que esta función también esté definida y llamada en initialize_all_tables
+    """Creates the reddit_comments table if it doesn't exist."""
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS reddit_comments (
+            id TEXT PRIMARY KEY,
+            post_id TEXT NOT NULL,
+            body TEXT,
+            author TEXT,
+            score INTEGER,
+            created_utc REAL, 
+            FOREIGN KEY (post_id) REFERENCES reddit_posts (id) ON DELETE CASCADE
+        );
+    """)
+    print("Schema: reddit_comments table ensured.")
 
 def create_transcripts_table(cursor):
     cursor.execute('''
@@ -114,6 +131,7 @@ def create_build_traits_table(cursor):
 def initialize_all_tables(conn):
     cursor = conn.cursor()
     create_reddit_posts_table(cursor)
+    create_reddit_comments_table(cursor) # Asegúrate que esta línea esté presente
     create_transcripts_table(cursor)
     create_external_articles_table(cursor)
     create_topics_table(cursor)
